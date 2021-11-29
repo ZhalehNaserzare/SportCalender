@@ -3,6 +3,7 @@
 namespace Jalez\SportCalender\Classes;
 
 use mysqli;
+use mysqli_stmt;
 
 class Database {
     // Singleton Pattern
@@ -45,6 +46,17 @@ class Database {
         } else {
             return false;
         }
+    }
+
+    /**
+     * @return mysqli_stmt|false
+     */
+    public function prepare(string $sqlStatement): mysqli_stmt {
+        return $this->connection->prepare($sqlStatement);
+    }
+
+    public function getLastInstetedId(): int {
+        return $this->connection->insert_id;
     }
     
     

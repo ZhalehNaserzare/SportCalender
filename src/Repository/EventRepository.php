@@ -2,6 +2,8 @@
 
 namespace Jalez\SportCalender\Repository;
 
+use DateTime;
+use DateTimeInterface;
 use Jalez\SportCalender\Classes\Database;
 use Jalez\SportCalender\Entity\Category;
 use Jalez\SportCalender\Entity\Event;
@@ -39,7 +41,7 @@ class EventRepository {
                 e
             INNER JOIN team t1 ON e._id_first_team = t1.id
             INNER JOIN team t2 ON e._id_second_team = t2.id
-            INNER JOIN location l ON e._id_locatin = l.id
+            INNER JOIN location l ON e._id_location = l.id
             INNER JOIN category c ON e._id_category = c.id
         ";
 
@@ -72,5 +74,26 @@ class EventRepository {
         }
 
         return $events;
+    }
+
+    public function create(DateTime $dateTime, int $team1id, int $team2id, int $locationId, int $categoryId): ?int {
+
+        $sql = "INSERT INTO event (`date`, _id_first_team, _id_second_team, _id_category, _id_location) VALUES (?, ?, ?, ?, ?)";
+
+        $dateTimeString = $dateTime->format(DateTimeInterface::ISO8601);
+        $stmt = $this->database->prepare($sql);
+        $stmt->bind_param('siiii', 
+            $dateTimeString,
+            $team1id,
+            $team2id,
+            $locationId,
+            $categoryId,
+        );
+
+        if ($stmt->execute()) {
+            return $this->database->getLastInstetedId();
+        } else {
+            return null;
+        }
     }
 }
