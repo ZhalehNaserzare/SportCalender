@@ -27,7 +27,7 @@ class TeamRepository {
             $teams[] = new Team(
                 $row->id,
                 $row->team_name,
-                $row->number,
+                $row->homecity,
             );
         }
 

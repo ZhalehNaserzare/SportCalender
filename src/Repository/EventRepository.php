@@ -21,29 +21,45 @@ class EventRepository {
     /**
      * @return Event[]
      */
-    public function findAll(): array {
+    public function findAllInRange(?DateTime $startDate = null, ?DateTime $endDate = null, ?int $categoryId): array {
 
-        $sql = "
+        $sql = '
             SELECT
                 e.id AS e_id,
                 e.date AS e_datetime,
                 t1.id AS t1_id,
                 t1.team_name AS t1_team_name,
-                t1.number AS t1_number,
+                t1.homecity AS t1_homecity,
                 t2.id AS t2_id,
                 t2.team_name AS t2_team_name,
-                t2.number AS t2_number,
+                t2.homecity AS t2_homecity,
                 l.id AS l_id,
                 l.address AS l_address,
                 c.id AS c_id,
-                c.category_name AS c_category_name
+                c.name AS c_name
             FROM event
                 e
             INNER JOIN team t1 ON e._id_first_team = t1.id
             INNER JOIN team t2 ON e._id_second_team = t2.id
             INNER JOIN location l ON e._id_location = l.id
             INNER JOIN category c ON e._id_category = c.id
-        ";
+            ';
+        if ($startDate && $endDate) {
+            $sql .= '
+            WHERE 
+                e.date >= STR_TO_DATE("' . $startDate->format('Y-m-d'). '", "%Y-%m-%d") AND
+                e.date <= STR_TO_DATE("' . $endDate->format('Y-m-d 23:59:59'). '", "%Y-%m-%d %H:%i:%s")
+            ';
+            if ($categoryId) {
+                $categoryId = $this->database->escape($categoryId);
+                $sql .= "
+                    AND c.id = $categoryId
+                ";
+            }
+        }
+        $sql .= '
+            ORDER BY e.date ASC
+        ';
 
         $resultSet = $this->database->query($sql);
 
@@ -55,12 +71,12 @@ class EventRepository {
                 new Team(
                     $row->t1_id,
                     $row->t1_team_name,
-                    $row->t1_number,
+                    $row->t1_homecity,
                 ),
                 new Team(
                     $row->t2_id,
                     $row->t2_team_name,
-                    $row->t2_number,
+                    $row->t2_homecity,
                 ),
                 new Location(
                     $row->l_id,
@@ -68,7 +84,7 @@ class EventRepository {
                 ),
                 new Category(
                     $row->c_id,
-                    $row->c_category_name,
+                    $row->c_name,
                 ),
             );
         }

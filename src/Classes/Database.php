@@ -9,7 +9,7 @@ class Database {
     // Singleton Pattern
     protected static $_instance = null;
 
-    private $connection;
+    private mysqli $connection;
     private const SERVER_NAME = "localhost";
     private const USER = "wt2";
     private const PASS = "strenggeheim";
@@ -57,6 +57,10 @@ class Database {
 
     public function getLastInstetedId(): int {
         return $this->connection->insert_id;
+    }
+
+    public function escape($input) {
+        return $this->connection->real_escape_string($input);
     }
     
     

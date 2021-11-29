@@ -26,7 +26,7 @@ class CategoryRepository {
         while ($row = $resultSet->fetch_object()) {
             $categories[] = new Category(
                 $row->id,
-                $row->category_name,
+                $row->name,
             );
         }
 

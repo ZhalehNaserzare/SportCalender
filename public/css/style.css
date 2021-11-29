@@ -1,0 +1,73 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#page{
+    min-height: 90vh;
+}
+.padding-wrapper {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+}
+footer{
+    background-color: #0277bd;
+    color: #fff;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+footer a,
+footer a:hover{
+    color: #fff;
+}
+footer h6 {
+    font-size: 1rem;
+    font-weight: 400;
+}
+footer ul{
+    padding: 0 .75rem;
+    font-weight: 200;
+}
+footer ul li{
+    font-size: 0.8em;
+    line-height: 2.5;
+}
+@media (max-width:576px){
+	.footer-item{
+        text-align: left !important;
+	}
+	.footer-item li{
+		display: inline;
+        margin: 0.7em ;
+	}
+}
+
+
+
+
+
+
+
+
+
+/* Calendar */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: .5em;
+}
+
+.grid__cell {
+    background: #ddd;
+    height: 10em;
+    font-size: .75em;
+}
+
+.crid__cell--title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.event {
+    line-height: 1;
+    padding: .25em;
+}

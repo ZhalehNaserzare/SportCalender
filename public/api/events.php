@@ -6,7 +6,7 @@ require_once '../../vendor/autoload.php';
 
 $eventRepository = new EventRepository();
 
-$events = $eventRepository->findAll();
+$events = $eventRepository->findAllInRange();
 
 header('Content-Type: application/json');
 

@@ -5,13 +5,11 @@ namespace Jalez\SportCalender\Entity;
 class Team {
     public int $id;
     public string $name;
-    public int $number;
+    public string $homecity;
 
-    function __construct(int $id, string $name, int $numb) {
+    function __construct(int $id, string $name, string $homecity) {
         $this->id = $id ;
         $this->name = $name;
-        $this->numb = $numb; 
+        $this->homecity = $homecity; 
     }
 }
-
-?>
