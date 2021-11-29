@@ -1,5 +1,10 @@
 <?php
-class Database{
+
+namespace Jalez\SportCalender\Classes;
+
+use mysqli;
+
+class Database {
     // Singleton Pattern
     protected static $_instance = null;
 
@@ -17,19 +22,22 @@ class Database{
     }
     //Prohibit copying the instance from outside
     protected function __clone() {}
-    // Set up connection to DB
-    protected function __construct(){
-        // prohibit external instantiation
-        // Create connection
+    //Set up connection to DB
+    protected function __construct() {
+        //prohibit external instantiation
+        //Create connection
         $this->connection = new mysqli(Database::SERVER_NAME, Database::USER, Database::PASS, database::DB_NAME);
 
-        // Check connection
+        //Check connection
         if ($this->connection->connect_error) {
             die("Connection failed: " . $this->connection->connect_error);
         }
         $this->connection->set_charset('utf8mb4');
     }
-    // Send query to DB
+    
+    /**
+     * @return \mysqli_result|bool
+     */
     public function query(string $sqlStatement) {
         // send query(request) to DB and check if query(get) was successful
         if ($result = $this->connection->query($sqlStatement)) {
@@ -41,5 +49,3 @@ class Database{
     
     
 }
-
-?>

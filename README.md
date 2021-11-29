@@ -2,7 +2,11 @@
 
 Sportradar Coding Academy
 
-Coding Exercise
+## Installation
+
+To install the application run `composer install`
+
+## Coding Exercise
 
 1. Coding Exercise
 Goal is to implement a calendar for sport events. Events may be added to the calendar and it should be possible to categorize the events based on sports.
