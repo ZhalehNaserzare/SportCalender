@@ -10,10 +10,6 @@ class Database {
     protected static $_instance = null;
 
     private mysqli $connection;
-    private const SERVER_NAME = "localhost";
-    private const USER = "wt2";
-    private const PASS = "strenggeheim";
-    private const DB_NAME = "sport_calender";
 
     public static function getInstance() : self { // If the single instance does not yet exist, create it Then return the single instance
         if (self::$_instance === null) {
@@ -27,7 +23,12 @@ class Database {
     protected function __construct() {
         //prohibit external instantiation
         //Create connection
-        $this->connection = new mysqli(Database::SERVER_NAME, Database::USER, Database::PASS, database::DB_NAME);
+        $this->connection = new mysqli(
+            $_ENV['DATABASE_HOST'],
+            $_ENV['DATABASE_USER'],
+            $_ENV['DATABASE_PASS'],
+            $_ENV['DATABASE_NAME']
+        );
 
         //Check connection
         if ($this->connection->connect_error) {

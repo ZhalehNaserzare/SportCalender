@@ -17,9 +17,16 @@ if (isset($_POST['submit'])) {
 
     $dateTime = new DateTime("$date $time");
 
-    $eventRepository->create($dateTime, $firstTeamId, $secondTeamId, $locationId, $categoryId);
-
-    header('Location: ./?');
+    try {
+        $eventRepository->create($dateTime, $firstTeamId, $secondTeamId, $locationId, $categoryId);
+        header('Location: ./?');
+    } catch (Exception $e) {
+        if ($e->getCode() == EventRepository::EXCEPTION_TEAM_IDS_ARE_EQUAL) {
+            echo 'Error: ' . $e->getMessage();
+        } else {
+            echo 'An unknown error! Please try again later';
+        }
+    }
 }
 
 $locationRepository = new LocationRepository();

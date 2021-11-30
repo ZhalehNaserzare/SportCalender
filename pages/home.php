@@ -69,10 +69,10 @@ $nextMonth->modify('+1 month');
 
 
                 while ($currentDate <= $endDate) {
-                    $startOdTomorrow = clone $currentDate;
-                    $startOdTomorrow->modify('+1 day');
-                    $todaysEvents = array_filter($events, function($event) use ($currentDate, $startOdTomorrow) {
-                        return $event->dateTime >= $currentDate && $event->dateTime < $startOdTomorrow;
+                    $startOfTomorrow = clone $currentDate;
+                    $startOfTomorrow->modify('+1 day');
+                    $todaysEvents = array_filter($events, function($event) use ($currentDate, $startOfTomorrow) {
+                        return $event->dateTime >= $currentDate && $event->dateTime < $startOfTomorrow;
                     });
                     ?>
                         <div class="grid__cell">
@@ -91,7 +91,7 @@ $nextMonth->modify('+1 month');
                             ?>
                         </div>
                     <?php
-                    $currentDate = $startOdTomorrow;
+                    $currentDate = $startOfTomorrow;
                 }
             ?>
         </div>

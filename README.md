@@ -4,7 +4,11 @@ Sportradar Coding Academy
 
 ## Installation
 
-To install the application run `composer install`
+To install the application run `composer install`.
+
+## Testing
+
+To execute the UnitTests run `./vendor/bin/phpunit tests --testdox` in the console.
 
 ## Coding Exercise
 

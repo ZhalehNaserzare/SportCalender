@@ -3,6 +3,8 @@
 use Jalez\SportCalender\Repository\CategoryRepository;
 
 require_once '../../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImMutable(__DIR__ . '\..\..');
+$dotenv->load();
 
 $categoryRepository = new CategoryRepository();
 

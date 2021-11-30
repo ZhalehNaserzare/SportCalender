@@ -3,6 +3,8 @@
 use Jalez\SportCalender\Repository\LocationRepository;
 
 require_once '../../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImMutable(__DIR__ . '\..\..');
+$dotenv->load();
 
 $locationRepository = new LocationRepository();
 

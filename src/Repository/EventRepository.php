@@ -4,6 +4,7 @@ namespace Jalez\SportCalender\Repository;
 
 use DateTime;
 use DateTimeInterface;
+use Exception;
 use Jalez\SportCalender\Classes\Database;
 use Jalez\SportCalender\Entity\Category;
 use Jalez\SportCalender\Entity\Event;
@@ -11,6 +12,8 @@ use Jalez\SportCalender\Entity\Location;
 use Jalez\SportCalender\Entity\Team;
 
 class EventRepository {
+
+    public const EXCEPTION_TEAM_IDS_ARE_EQUAL = 36981;
 
     private Database $database;
 
@@ -92,7 +95,14 @@ class EventRepository {
         return $events;
     }
 
+    /**
+     * @throws Exception with code self::EXCEPTION_TEAM_IDS_ARE_EQUAL if the team IDs are equal
+     */
     public function create(DateTime $dateTime, int $team1id, int $team2id, int $locationId, int $categoryId): ?int {
+
+        if ($team1id == $team2id) {
+            throw new Exception('Team IDs must be different', self::EXCEPTION_TEAM_IDS_ARE_EQUAL);
+        }
 
         $sql = "INSERT INTO event (`date`, _id_first_team, _id_second_team, _id_category, _id_location) VALUES (?, ?, ?, ?, ?)";
 

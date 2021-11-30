@@ -1,6 +1,8 @@
 <?php
 
 require_once '../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImMutable(__DIR__ . '\..');
+$dotenv->load();
 
 ?>
 <!DOCTYPE html>
