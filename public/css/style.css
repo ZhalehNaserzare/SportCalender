@@ -46,6 +46,7 @@ footer ul li{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: .5em;
+    margin-top: 1em;
 }
 
 .grid__cell {
@@ -54,6 +55,7 @@ footer ul li{
     font-size: .75em;
 }
 
+.grid__title,
 .crid__cell--title {
     text-align: center;
     font-weight: bold;

@@ -53,6 +53,13 @@ $nextMonth->modify('+1 month');
             </div>    
         </div>
         <div class="grid">
+            <div class="grid__title">Mo</div>
+            <div class="grid__title">Tu</div>
+            <div class="grid__title">We</div>
+            <div class="grid__title">Th</div>
+            <div class="grid__title">Fr</div>
+            <div class="grid__title">Sa</div>
+            <div class="grid__title">Su</div>
             <?php
 
                 $currentDate = clone $input;
