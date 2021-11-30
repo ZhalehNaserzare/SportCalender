@@ -32,4 +32,18 @@ class CategoryRepository {
 
         return $categories;
     }
+
+    public function create(string $name): ?int {
+
+        $sql = "INSERT INTO category (`name`) VALUES (?)";
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->bind_param('s', $name);
+
+        if ($stmt->execute()) {
+            return $this->database->getLastInstetedId();
+        } else {
+            return null;
+        }
+    }
 }

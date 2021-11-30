@@ -23,22 +23,35 @@ $nextMonth->modify('+1 month');
 <div class="padding-wrapper">
     <div class="container">
         <h1>Sportcalendar</h1>
-        <label for="cars">Choose a car:</label>
-
-        <select id="category-select" class="form-select" aria-label="Default select example">
-            <option <?= $categoryId ? '' : 'selected' ?> value="0">Alle</option>
-            <?php
-                foreach($categories as $category) {
-                    echo '<option' . ($categoryId == $category->id ? ' selected' : '')  . ' value="' . $category->id . '">' . $category->name . '</option>';
-                }
-            ?>
-        </select>
-
-        <h2><?= $input->format('F Y') ?></h2>
-
-        <a href="?date=<?= $previousMonth->format('Y-m-d') ?>">back</a>
-        <a href="?date=<?= $nextMonth->format('Y-m-d') ?>">next</a>
-
+        <div class="form-group row">
+            <label for="category-select" class="col-sm-2 col-form-label">Choose a category: </label>         
+            <select id="category-select" class="col-sm-3 form-control" aria-label="Default select example">
+                <option <?= $categoryId ? '' : 'selected' ?> value="0">Alle</option>
+                <?php
+                    foreach($categories as $category) {
+                        echo '<option' . ($categoryId == $category->id ? ' selected' : '')  . ' value="' . $category->id . '">' . $category->name . '</option>';
+                    }
+                ?>
+            </select>
+            <div class="col-sm-7">
+                <a href="?page=add-event" class="btn btn-primary">Add Event</a><br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="navigation-icon" href="?date=<?= $previousMonth->format('Y-m-d') ?>"><i class="fas fa-chevron-left"></i></a>
+                    </div>
+                    <div class="col-6">
+                        <a class="navigation-icon" href="?date=<?= $nextMonth->format('Y-m-d') ?>"><i class="fas fa-chevron-right"></i></a>
+                    </div>   
+                </div>  
+            </div>
+            <div class="col-10">
+                <h2><?= $input->format('F Y') ?></h2>
+            </div>    
+        </div>
         <div class="grid">
             <?php
 
@@ -63,7 +76,7 @@ $nextMonth->modify('+1 month');
                     });
                     ?>
                         <div class="grid__cell">
-                            <div class="crid__cell--title">
+                            <div class="crid__cell--title" style="background-color:LightGray;">
                                 <?= $currentDate->format('j') ?>
                             </div>
                             <?php 

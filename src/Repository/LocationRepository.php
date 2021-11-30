@@ -3,9 +3,9 @@
 namespace Jalez\SportCalender\Repository;
 
 use Jalez\SportCalender\Classes\Database;
-use Jalez\SportCalender\Entity\Team;
+use Jalez\SportCalender\Entity\Location;
 
-class TeamRepository {
+class LocationRepository {
 
     private Database $database;
 
@@ -14,32 +14,31 @@ class TeamRepository {
     }
 
     /**
-     * @return Team[]
+     * @return Location[]
      */
     public function findAll(): array {
 
-        $sql = "SELECT * FROM team";
+        $sql = "SELECT * FROM `location`";
 
         $resultSet = $this->database->query($sql);
 
-        $teams = [];
+        $locations = [];
         while ($row = $resultSet->fetch_object()) {
-            $teams[] = new Team(
+            $locations[] = new Location(
                 $row->id,
-                $row->team_name,
-                $row->homecity,
+                $row->address,
             );
         }
 
-        return $teams;
+        return $locations;
     }
 
-    public function create(string $name, string $homecity): ?int {
+    public function create(string $address): ?int {
 
-        $sql = "INSERT INTO team (team_name, homecity) VALUES (?, ?)";
+        $sql = "INSERT INTO location (`address`) VALUES (?)";
 
         $stmt = $this->database->prepare($sql);
-        $stmt->bind_param('ss', $name, $homecity);
+        $stmt->bind_param('s', $address);
 
         if ($stmt->execute()) {
             return $this->database->getLastInstetedId();

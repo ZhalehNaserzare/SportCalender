@@ -41,14 +41,6 @@ footer ul li{
 	}
 }
 
-
-
-
-
-
-
-
-
 /* Calendar */
 .grid {
     display: grid;
@@ -70,4 +62,12 @@ footer ul li{
 .event {
     line-height: 1;
     padding: .25em;
+}
+
+.navigation-icon {
+    width: 1.5em;
+    height: 1.5em;
+    display: inline-block;
+    font-size: 1.5em;
+    padding: 0 .5em;
 }

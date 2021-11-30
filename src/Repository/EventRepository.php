@@ -21,7 +21,7 @@ class EventRepository {
     /**
      * @return Event[]
      */
-    public function findAllInRange(?DateTime $startDate = null, ?DateTime $endDate = null, ?int $categoryId): array {
+    public function findAllInRange(?DateTime $startDate = null, ?DateTime $endDate = null, ?int $categoryId = null): array {
 
         $sql = '
             SELECT
