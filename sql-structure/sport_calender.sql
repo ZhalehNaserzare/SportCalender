@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Erstellungszeit: 28. Nov 2021 um 10:44
+-- Erstellungszeit: 30. Nov 2021 um 16:10
 -- Server-Version: 10.4.11-MariaDB
 -- PHP-Version: 7.4.4
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `category_name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -44,7 +44,7 @@ CREATE TABLE `event` (
   `_id_first_team` int(11) NOT NULL,
   `_id_second_team` int(11) NOT NULL,
   `_id_category` int(11) NOT NULL,
-  `_id_locatin` int(11) NOT NULL
+  `_id_location` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -67,7 +67,7 @@ CREATE TABLE `location` (
 CREATE TABLE `team` (
   `id` int(11) NOT NULL,
   `team_name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `number` int(11) NOT NULL
+  `homecity` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -86,7 +86,7 @@ ALTER TABLE `category`
 ALTER TABLE `event`
   ADD PRIMARY KEY (`id`),
   ADD KEY `_id_category` (`_id_category`),
-  ADD KEY `_id_locatin` (`_id_locatin`),
+  ADD KEY `_id_locatin` (`_id_location`),
   ADD KEY `_id_first_team` (`_id_first_team`),
   ADD KEY `_id_second_team` (`_id_second_team`);
 
@@ -139,7 +139,7 @@ ALTER TABLE `team`
 --
 ALTER TABLE `event`
   ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`_id_category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`_id_locatin`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`_id_location`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `event_ibfk_3` FOREIGN KEY (`_id_first_team`) REFERENCES `team` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `event_ibfk_4` FOREIGN KEY (`_id_second_team`) REFERENCES `team` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
