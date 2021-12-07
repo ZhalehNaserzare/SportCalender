@@ -6,6 +6,13 @@ use Jalez\SportCalender\Repository\CategoryRepository;
 use PHPUnit\Framework\TestCase;
 
 final class CategoryRepositoryTest extends TestCase {
+
+    public static function setUpBeforeClass(): void {
+        $dotenv = Dotenv\Dotenv::createImMutable(__DIR__ . '\..');
+        $dotenv->load();
+        parent::setUpBeforeClass();
+    }
+
     public function testGetListIsListOfCategoryObbjects(): void {
         $repository = new CategoryRepository();
         $categories = $repository->findAll();
